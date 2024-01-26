@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
+
+  <!-- Login page for doctor and patient from where the flow of application starts -->
+  <body>
+    <div class="form-back">
+      <!-- Content of the div displayed on the left side of the page -->
+      <div class="login-left">
+        <img src="./assets/medical-records-logo.jpeg" />
+        <h1>Welcome to Medi-Records</h1>
+
+        <!-- Buttons to select if the user wants to Login or Register -->
+        <div class="toggle-buttons">
+          <button id="login">Login</button>
+          <button id="signup">SignUp</button>
+        </div>
+
+        <!-- Dropdown to select if teh user wants to register as a Doctor or a Patient -->
+        <div class="label-register-as">
+          <label for="register-as">Register As: </label>
+          <select id="register-as">
+            <option value="Doctor" selected>Doctor</option>
+            <option value="Patient">Patient</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Content of div diisplayed on the right side of the page -->
+      <div class="login-right">
+        <!-- Login form to login as patient or as a doctor -->
+        <div class="login-forms" id="login-form">
+          <h1>Login</h1>
+          <div class="login-button">
+            <button type="button" id="docLoginButton">Login as Doctor</button>
+            <button type="button" id="patLoginButton">Login as Patient</button>
+          </div>
+        </div>
+
+        <div class="register-forms" id="register-form">
+          <h1>Sign Up as Doctor</h1>
+
+          <!-- Register form to register as a Doctor -->
+          <form class="register-doctor" id="docregister">
+            <label for="docname"
+              >Name
+              <input
+                type="text"
+                id="docname"
+                placeholder="Please Enter Your Name"
+                required
+              />
+            </label>
+            <label for="docemail"
+              >Email
+              <input
+                type="email"
+                id="docemail"
+                placeholder="Please Enter Your Email"
+                required
+              />
+            </label>
+            <legend>
+              Please select your gender
+              <label for="docmale">
+                <input
+                  type="radio"
+                  id="docmale"
+                  value="Male"
+                  name="docgender"
+                />
+                Male
+              </label>
+              <label for="docfemale">
+                <input
+                  type="radio"
+                  id="docfemale"
+                  value="Female"
+                  name="docgender"
+                />
+                Female
+              </label>
+            </legend>
+            <label for="docspecs"
+              >Specialization
+              <input
+                type="text"
+                id="docspecs"
+                placeholder="Please Enter Your Specialization"
+                required
+              />
+            </label>
+            <label for="reg-no"
+              >Registration Number
+              <input
+                type="text"
+                id="reg-no"
+                placeholder="Please Enter Your Registration Number"
+                required
+              />
+            </label>
+            <label for="docaddress"
+              >Wallet Address
+              <input
+                type="text"
+                id="docaddress"
+                placeholder="Please Enter Your Wallet Address"
+                required
+              />
+            </label>
+            <button type="button" value="register" id="regDoctor">
+              Sign Up
+            </button>
+          </form>
+
+          <!-- Register form to register as a Patient -->
+          <form class="register-patient" id="patregister">
+            <label for="patname"
+              >Name
+              <input
+                type="text"
+                id="patname"
+                placeholder="Please Enter Your Name"
+                required
+              />
+            </label>
+            <label for="patemail"
+              >Email
+              <input
+                type="email"
+                id="patemail"
+                placeholder="Please Enter Your Email"
+                required
+              />
+            </label>
+            <legend>
+              Please select your gender
+              <label for="patmale">
+                <input
+                  type="radio"
+                  id="patmale"
+                  value="Male"
+                  name="patgender"
+                  checked
+                />
+                Male
+              </label>
+              <label for="patfemale">
+                <input
+                  type="radio"
+                  id="patfemale"
+                  value="Female"
+                  name="patgender"
+                />
+                Female
+              </label>
+            </legend>
+            <label for="patailment"
+              >Ailment
+              <input
+                type="text"
+                id="patailment"
+                placeholder="Please Enter Your Ailment"
+                required
+              />
+            </label>
+            <label for="phn-no"
+              >Phone Number
+              <input
+                type="number"
+                id="phn-no"
+                min="10"
+                max="10"
+                placeholder="Please Enter Your 10-Digit Phone Number"
+                required
+              />
+            </label>
+            <label for="pataddress"
+              >Wallet Address
+              <input
+                type="text"
+                id="pataddress"
+                placeholder="Please Enter Your Wallet Address"
+                required
+              />
+            </label>
+            <button type="button" value="register" id="reg-pat">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <script src="login.js"></script>
+    <script src="../assets/MediRecords.js"></script>
+    <script src="contractMethods.js"></script>
+  </body>
+</html>

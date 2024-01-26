@@ -1,0 +1,47 @@
+body {
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+  color: darkolivegreen;
+  font-size: 2em;
+}
+
+.doctor {
+  text-align: center;
+  margin: 2%;
+}
+
+tr {
+  margin: 1%;
+  width: 100%;
+  border: 2px solid black;
+}
+
+th {
+  padding: 1%;
+  width: 20%;
+  color: darkorchid;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+td {
+  width: 15%;
+  color: darkolivegreen;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+button {
+  padding: 1%;
+  width: 70%;
+  border: none;
+  box-shadow: 1px 1px 2px olivedrab;
+  height: 35px;
+  background-color: darkolivegreen;
+  color: white;
+  font-weight: 600;
+  font-size: 0.8em;
+}

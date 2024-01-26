@@ -1,0 +1,56 @@
+.header {
+  color: darkolivegreen;
+  text-align: center;
+  font-size: 40px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.details {
+  margin: 2%;
+  display: block;
+  text-align: left;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.details label {
+  color: darkorchid;
+  font-size: 1.2em;
+  font-weight: 700;
+  display: block;
+}
+
+input {
+  display: block;
+  width: 90%;
+  padding: 1%;
+  margin: 1%;
+  color: darkolivegreen;
+  font-weight: 700;
+  background-color: rgb(238, 248, 227);
+  border: none;
+  box-shadow: 5px 5px 5px darkolivegreen;
+  font-size: 0.8em;
+}
+
+#submitReport {
+  margin: 3% 30% 5% 30%;
+  padding: 1%;
+  width: 30%;
+  color: white;
+  font-weight: 700;
+  background-color: darkolivegreen;
+  border: none;
+  box-shadow: 2px 2px 2px olivedrab;
+}
+
+#submitFile {
+  margin: 5% 30% 0 30%;
+  padding: 1%;
+  width: 30%;
+  color: white;
+  font-weight: 700;
+  background-color: darkolivegreen;
+  border: none;
+  box-shadow: 2px 2px 2px olivedrab;
+}

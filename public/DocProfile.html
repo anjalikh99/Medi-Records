@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/Profile.css" />
+    <title>Profile</title>
+  </head>
+
+  <!-- Doctor's Profile page to display Logged In Doctor's Details -->
+  <body id="profile" onload="getDetails()">
+    <h1 class="header">Profile</h1>
+    <div class="details">
+      <label for="patname"
+        >Name
+        <input type="text" id="docname" readonly />
+      </label>
+      <label for="patemail"
+        >Email
+        <input type="email" id="docemail" readonly />
+      </label>
+      <label for="patmale"
+        >Gender
+        <input type="text" id="docgender" name="patgender" readonly />
+      </label>
+      <label for="docspecs"
+        >Specialization
+        <input type="text" id="docspecs" readonly />
+      </label>
+      <label for="reg-no"
+        >Registration Number
+        <input type="text" id="reg-no" readonly />
+      </label>
+      <label for="pataddress"
+        >Wallet Address
+        <input type="text" id="docaddress" readonly />
+      </label>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <script src="contractMethods.js"></script>
+    <script src="./assets/MediRecords.js"></script>
+    <script src="DocProfile.js"></script>
+  </body>
+</html>

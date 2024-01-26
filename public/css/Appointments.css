@@ -1,0 +1,43 @@
+body {
+  text-align: center;
+  background-color: #f2e9f0;
+  margin: 0;
+}
+
+.header {
+  font-size: 3rem;
+  color: #8c6f86;
+}
+
+#doctor-details {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nothing {
+  text-align: center;
+  color: #8c6f86;
+  margin: 2% auto;
+}
+
+.doctor {
+  background-color: #574c55;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 700;
+  margin: 2% 3%;
+  padding: 15px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 5px 5px 5px #b096ab;
+}
+
+button {
+  width: 60%;
+  background-color: #b096ab;
+  color: black;
+  font-weight: 700;
+  font-size: 1em;
+  padding: 5px;
+  margin-bottom: 5px;
+}

@@ -1,0 +1,188 @@
+body {
+  background: url(../assets/login-back.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.form-back {
+  display: flex;
+  width: 80%;
+  height: 90%;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 3% auto;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px 1px #4b4c4d;
+  padding: 0;
+}
+
+.login-left {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  width: 50%;
+  height: 100%;
+}
+
+.login-left img {
+  border-radius: 60%;
+  width: 200px;
+  height: 200px;
+  margin-top: 15%;
+}
+
+.login-left h1 {
+  color: mediumorchid;
+}
+
+.login-right {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  width: 50%;
+  padding: 2%;
+  padding-bottom: 0.5%;
+  text-align: center;
+}
+
+.toggle-buttons {
+  display: flex;
+  width: 60%;
+  height: 7%;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 0 auto;
+  border-radius: 10px 0;
+  padding: 0;
+}
+
+.toggle-buttons button {
+  margin: 0;
+  margin-top: 25%;
+  width: 50%;
+  height: 100%;
+  font-size: 1em;
+  font-weight: 600;
+  box-shadow: 5px 0px 15px 3px rgb(166, 162, 162);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.toggle-buttons button:hover {
+  background-color: mediumorchid;
+  color: white;
+}
+
+#login {
+  border-radius: 10px 0 0;
+  border: none;
+}
+
+#signup {
+  border-radius: 0 0 10px;
+  border: none;
+}
+
+#register-as {
+  width: 30%;
+  margin-left: 2%;
+  vertical-align: middle;
+  height: 25px;
+  padding: 2%;
+  font-size: 15px;
+  color: mediumorchid;
+  border: none;
+}
+
+.label-register-as {
+  color: mediumorchid;
+  font-weight: 600;
+  margin-top: 20%;
+}
+
+.login-forms {
+  margin-top: 30%;
+  display: none;
+}
+
+.login-forms h1 {
+  color: white;
+  margin-bottom: 15%;
+}
+
+.login-button button {
+  background-color: mediumorchid;
+  color: white;
+  font-weight: 600;
+  height: 40px;
+  width: 80%;
+  font-size: 1em;
+  padding: 1%;
+  margin: 3%;
+  border-radius: 10px;
+  border: none;
+}
+
+.register-forms {
+  margin-top: 1%;
+}
+
+.register-forms h1 {
+  color: white;
+  margin: 0;
+  margin-bottom: 2%;
+}
+
+.register-forms label {
+  color: white;
+  font-weight: 600;
+  display: block;
+  text-align: left;
+  margin: 1.5%;
+}
+
+input {
+  display: block;
+  margin-top: 1%;
+  width: 90%;
+  height: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 1.5%;
+}
+
+input::placeholder {
+  color: rgb(211, 208, 208);
+}
+
+legend {
+  color: white;
+  text-align: left;
+  padding: 1% 0;
+}
+
+input[type="radio"] {
+  height: unset;
+  color: white;
+  display: unset;
+  width: unset;
+}
+
+button[value="register"] {
+  background-color: mediumorchid;
+  color: white;
+  font-weight: 600;
+  height: 35px;
+  width: 40%;
+  font-size: 1em;
+  padding: 1%;
+  margin-top: 1%;
+  border-radius: 10px;
+  border: none;
+  margin-left: -20%;
+}
+
+.register-patient {
+  display: none;
+}
