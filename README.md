@@ -15,5 +15,7 @@
 6. execute the shell command `node app.js` or
 --- install nodemon globally `npm i nodemon -g` and execute `nodemon app.js` for restarting the server automatically on changes
 
-7. Your project is ready to be used. Go to localhost:3000 to interact with the project
+7. To run the test cases execute `npx hardhat test`
+
+8. Your project is ready to be used. Go to localhost:3000 to interact with the project
 
