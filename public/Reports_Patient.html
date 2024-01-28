@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/Appointments.css" />
+    <title>Reports</title>
+  </head>
+
+  <!-- Reports Page in Patient's Dashboard to enable patients to view their prescriptions by the doctor -->
+  <body onload="getPatientReports()">
+    <h1 class="header">Reports</h1>
+    <div id="doctor-details"></div>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <script src="contractMethods.js"></script>
+    <script src="./assets/MediRecords.js"></script>
+    <script src="DocProfile.js"></script>
+  </body>
+</html>

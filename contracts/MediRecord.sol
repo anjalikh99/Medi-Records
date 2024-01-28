@@ -109,8 +109,8 @@ contract MediRecords{
         return true;
     } 
 
-    // function to retrieve patient records using the patient id by the Doctor
-    function getPatientDetails(address _patientId) public view isDoctor returns (Record[] memory) {
+    // function to retrieve patient records using the patient id by the Doctor/Patient
+    function getPatientDetails(address _patientId) public view returns (Record[] memory) {
         require(patientList[_patientId].walletAddress == _patientId, "Patient Does not exist");
         return patientList[_patientId].records;
     }

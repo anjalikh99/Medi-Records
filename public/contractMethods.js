@@ -3,7 +3,7 @@ let web3;
 // Function to create contract instance
 
 async function initializeMetamask() {
-  const contractAddress = "0x91Fa2daF4d8FDaAaA3dbAddA358cBb2cBafaD92b";
+  const contractAddress = "0xfdd733D6c07F0a2EefC544642276b1B08a0c6e03";
   if (typeof window.web3 !== "undefined") {
     web3 = new Web3(window.ethereum);
   } else {
@@ -399,6 +399,78 @@ async function getPatientRecords(address) {
           let hash = result[i].cid.trim();
           window.open(`https://gateway.pinata.cloud/ipfs/${hash}`, "_blank");
         }
+      }
+    });
+}
+
+// Function to allow patient to get all the reports/consulation details
+
+async function viewPatientsReports(address) {
+  let recordContract = await initializeMetamask();
+  const mainDiv = document.getElementById("doctor-details");
+  recordContract.methods
+    .getPatientDetails(address)
+    .call()
+    .then((result) => {
+      if (result.length === 0) {
+        mainDiv.innerHTML = `<h2 class="nothing">Nothing to Display</h2>`;
+      } else {
+        result.forEach((record, i) => {
+          let doctorAddress = record[3];
+          let timestamp = parseInt(record[4]) * 1000;
+          let date = new Date(timestamp);
+          date = date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+          const div = document.createElement("div");
+          div.setAttribute("class", "doctor");
+          const pElement = document.createElement("p");
+          const ptext = document.createTextNode(`Date:- ${date}`);
+          pElement.append(ptext);
+          div.append(pElement);
+          recordContract.methods
+            .doctorList(doctorAddress)
+            .call()
+            .then((doctor) => {
+              if (doctor) {
+                for (let j = 0; j < 6; j++) {
+                  if (j === 1 || j === 3 || j === 4) {
+                    continue;
+                  }
+                  const pElement = document.createElement("p");
+                  const ptext = document.createTextNode(`${doctor[`${j}`]}`);
+                  pElement.append(ptext);
+                  div.append(pElement);
+                }
+                const viewButton = document.createElement("button");
+                const viewText = document.createTextNode("View Prescription");
+                viewButton.append(viewText);
+                viewButton.setAttribute("id", `view${i}`);
+                viewButton.setAttribute("onclick", "viewPrescription(this)");
+                div.append(viewButton);
+                mainDiv.append(div);
+              } else {
+                alert("Error Retrieving Data");
+              }
+            });
+        });
+      }
+    });
+}
+
+//function to view doctor's prescription when button clicked by patient
+async function viewDoctorPrescription(address, id) {
+  let recordContract = await initializeMetamask();
+  accounts = await ethereum.request({ method: "eth_requestAccounts" });
+  recordContract.methods
+    .getPatientDetails(address)
+    .call()
+    .then((result) => {
+      if (result.length > 0) {
+        let hash = result[id].cid.trim();
+        window.open(`https://gateway.pinata.cloud/ipfs/${hash}`, "_blank");
       }
     });
 }

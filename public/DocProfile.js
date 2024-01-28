@@ -71,9 +71,6 @@ function viewRecords(event) {
   const patientArray = JSON.parse(localStorage.getItem(`${docAddress}`));
   const patientAddress = patientArray[id].address;
   getPatientRecords(patientAddress);
-  ipfsUrl =
-    "https://beige-decent-chickadee-600.mypinata.cloud/ipfs/QmaSHGobmMWyGec6SWukGxvfnC2RiLqjTeof3CK3FopM9W";
-  // window.location.href = `$ipfsUrl`;
 }
 
 // Function invoked when button complete consultation in Patients.html is clicked by the Doctor if he/she has checked the patient
@@ -101,4 +98,19 @@ function markComplete(event) {
   } else {
     alert("Patient Consultation already completed!");
   }
+}
+
+// Function invoked when Reports_Patient.html is loaded to display all the doctors consulted and the prescriptions provided by them to Patient
+function getPatientReports()
+{
+   const patAddress = localStorage.getItem("PatUser").toLowerCase();
+   viewPatientsReports(patAddress);
+}
+
+// Function invoked on click of view Prescription Button on Reports_Patient.html
+function viewPrescription(event)
+{
+  const id = parseInt(event.id.substr(4));
+  const patAddress = localStorage.getItem("PatUser").toLowerCase();
+  viewDoctorPrescription(patAddress, id);
 }
