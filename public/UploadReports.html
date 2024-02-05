@@ -15,9 +15,9 @@
         >CID
         <input type="text" id="cid" required />
       </label>
-      <label for="filename"
-        >FileName
-        <input type="text" id="filename" required />
+      <label for="diagnosis"
+        >Diagnosis
+        <input type="text" id="diagnosis" required />
       </label>
       <label for="patId"
         >Patient Id
@@ -48,7 +48,6 @@
         // files uploaded to input type file with id "prescription" retrieved
         const files = document.getElementById("prescription");
         const file = files.files[0];
-        document.getElementById("filename").value = file.name;
 
         if (!file) {
           console.error("Please select a file.");

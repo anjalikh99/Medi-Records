@@ -13,27 +13,34 @@
     <div class="details">
       <label for="patname"
         >Name
-        <input type="text" id="docname" readonly />
+        <input type="text" id="docname" disabled />
       </label>
       <label for="patemail"
         >Email
-        <input type="email" id="docemail" readonly />
+        <input type="email" id="docemail" disabled />
       </label>
       <label for="patmale"
         >Gender
-        <input type="text" id="docgender" name="patgender" readonly />
+        <input type="text" id="docgender" name="patgender" disabled />
       </label>
       <label for="docspecs"
         >Specialization
-        <input type="text" id="docspecs" readonly />
+        <input type="text" id="docspecs" disabled />
       </label>
       <label for="reg-no"
         >Registration Number
-        <input type="text" id="reg-no" readonly />
+        <input type="text" id="reg-no" disabled />
+      </label>
+      <label for="consult-fee"
+        ><span>Consultation Fee (INR)</span><br />
+        <input type="number" id="consult-fee" required />
+        <button type="button" id="update-fee" onclick="updateFee()">
+          Update
+        </button>
       </label>
       <label for="pataddress"
         >Wallet Address
-        <input type="text" id="docaddress" readonly />
+        <input type="text" id="docaddress" disabled />
       </label>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>

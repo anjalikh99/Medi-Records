@@ -25,18 +25,21 @@ th {
   color: darkorchid;
   font-size: 1.2em;
   font-weight: 600;
+  border: 4px solid darkorchid;
 }
 
 td {
   width: 15%;
+  padding: 5px;
   color: darkolivegreen;
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 600;
+  border: 4px solid darkorchid;
 }
 
 button {
   padding: 1%;
-  width: 70%;
+  width: 80px;
   border: none;
   box-shadow: 1px 1px 2px olivedrab;
   height: 35px;
@@ -44,4 +47,97 @@ button {
   color: white;
   font-weight: 600;
   font-size: 0.8em;
+}
+
+.consult-modal {
+  padding: 2%;
+  width: 40%;
+  height: 60%;
+  text-align: left;
+  margin: 10px auto;
+  background-color: rgb(114, 126, 93);
+  box-shadow: 5px 5px 5px black;
+  border-radius: 20px;
+  transform: translate(-50%, -50%);
+}
+
+label {
+  display: block;
+  font-weight: 700;
+  color: white;
+}
+
+input {
+  display: block;
+  width: 90%;
+  margin: 1%;
+  height: 30px;
+  padding: 2px;
+  color: black;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+textarea {
+  display: block;
+  margin: 1%;
+  color: black;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.btn {
+  width: 40%;
+  margin: 1% 25%;
+  background-color: darkorchid;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  font-size: 1em;
+  box-shadow: 2px 2px 2px darkorchid;
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  margin: 10px auto;
+  background-color: rgb(114, 126, 93);
+  box-shadow: 5px 5px 5px black;
+  padding: 1rem 1.5rem;
+  width: 60%;
+  border-radius: 0.5rem;
+}
+
+.close-button {
+  width: 40%;
+  margin: 1% 25%;
+  background-color: darkorchid;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  font-size: 1em;
+  box-shadow: 2px 2px 2px darkorchid;
+}
+
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }

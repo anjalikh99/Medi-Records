@@ -7,6 +7,11 @@ function getDetails() {
   getDoctorDetails(address);
 }
 
+//Function call from DocProfile.html on click of Update button to update the consultation fees of doctor
+function updateFee() {
+  updateConsultationFees();
+}
+
 // Function call from PatProfile.html on window onload to retrieve Patient's details from blockchain and display
 function getPatDetails() {
   // address of patient stored in localStorage during patient's registration
@@ -14,36 +19,6 @@ function getPatDetails() {
 
   // Function call for method declared in contractMethods.js to get patient details
   getPatientDetails(address);
-}
-
-// Function call from Doctors.html on window onload to display list of all doctors
-function getDoctors() {
-  // Function call for method declared in contractMethods.js to get Doctor's list
-  getDoctorsList();
-}
-
-// Function invoked when consult button is clicked by the patient to select the Doctor for appointment
-// The doctor is added to the array of other doctors selected stored in localStorage for corresponding patient
-function consult(event) {
-  const tr = document.getElementById(`tr${event.id}`);
-  const doctorAddress = tr.firstChild.textContent.toLowerCase();
-  const patAddress = localStorage.getItem("PatUser");
-  const doctorArray = JSON.parse(localStorage.getItem(`${patAddress}`));
-  const patients = JSON.parse(localStorage.getItem(`${doctorAddress}`));
-  for (let i = 0; i < doctorArray.length; i++) {
-    if (
-      doctorArray[i].address === doctorAddress ||
-      patients[i].address === patAddress
-    ) {
-      alert("Appointment already taken!!");
-      return;
-    }
-  }
-  doctorArray.push({ address: doctorAddress, checked: false });
-  patients.push({ address: patAddress, checked: false });
-  localStorage.setItem(`${patAddress}`, JSON.stringify(doctorArray));
-  localStorage.setItem(`${doctorAddress}`, JSON.stringify(patients));
-  alert("Appointment Scheduled");
 }
 
 // Function invoked on window onload in Appointments.html to get all the appointments scheduled for the patient
@@ -70,7 +45,7 @@ function viewRecords(event) {
   const docAddress = localStorage.getItem("DocUser").toLowerCase();
   const patientArray = JSON.parse(localStorage.getItem(`${docAddress}`));
   const patientAddress = patientArray[id].address;
-  getPatientRecords(patientAddress);
+  getPatientRecords(patientAddress, event.id);
 }
 
 // Function invoked when button complete consultation in Patients.html is clicked by the Doctor if he/she has checked the patient
@@ -101,15 +76,13 @@ function markComplete(event) {
 }
 
 // Function invoked when Reports_Patient.html is loaded to display all the doctors consulted and the prescriptions provided by them to Patient
-function getPatientReports()
-{
-   const patAddress = localStorage.getItem("PatUser").toLowerCase();
-   viewPatientsReports(patAddress);
+function getPatientReports() {
+  const patAddress = localStorage.getItem("PatUser").toLowerCase();
+  viewPatientsReports(patAddress);
 }
 
 // Function invoked on click of view Prescription Button on Reports_Patient.html
-function viewPrescription(event)
-{
+function viewPrescription(event) {
   const id = parseInt(event.id.substr(4));
   const patAddress = localStorage.getItem("PatUser").toLowerCase();
   viewDoctorPrescription(patAddress, id);

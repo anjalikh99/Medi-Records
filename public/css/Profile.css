@@ -54,3 +54,30 @@ input {
   border: none;
   box-shadow: 2px 2px 2px olivedrab;
 }
+
+label[for="consult-fee"]
+{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+label[for="consult-fee"] > span
+{
+  width: 100%;
+}
+
+#consult-fee{
+  width: 77%;
+}
+
+#update-fee{
+  margin: 1%;
+  padding: 1%;
+  width: 9%;
+  color: white;
+  display: inline-block;
+  font-weight: 700;
+  background-color: darkolivegreen;
+  border: none;
+  box-shadow: 2px 2px 2px olivedrab;
+}

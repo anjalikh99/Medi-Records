@@ -16,13 +16,39 @@
           <th>Doctor's Id</th>
           <th>Name</th>
           <th>Speciality</th>
+          <th>Fees</th>
           <th></th>
         </tr>
       </table>
     </div>
+    <div class="modal">
+      <div class="modal-content">
+        <label>
+          Please Describe your Ailment
+          <textarea class="ailment" rows="5" cols="45" id="ailment"> </textarea>
+        </label>
+        <label>
+          Consultation Fee (INR)
+          <input type="text" id="consult-fees" disabled />
+        </label>
+        <label>
+          Doctor's Address
+          <input type="text" id="doc-address" disabled />
+        </label>
+        <button
+          type="button"
+          class="btn"
+          id="pay-confirm"
+          onclick="makePayment()"
+        >
+          Pay and Confirm</button
+        ><br />
+        <button type="button" class="close-button">Close</button>
+      </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
     <script src="contractMethods.js"></script>
     <script src="./assets/MediRecords.js"></script>
-    <script src="DocProfile.js"></script>
+    <script src="doctors.js"></script>
   </body>
 </html>

@@ -29,7 +29,8 @@ describe("MediRecords Contract Events", function () {
         "krishanrsinghal@gmail.com",
         "Orthopedician",
         "Male",
-        "KS1234"
+        "KS1234",
+        200
       )
     )
       .to.emit(contract, "DoctorAdded")
@@ -44,7 +45,6 @@ describe("MediRecords Contract Events", function () {
         "8303673253",
         "Joynath Barman",
         "joynath12@gmail.com",
-        "Teeth Bite",
         "Male"
       )
     )
@@ -58,7 +58,7 @@ describe("MediRecords Contract Events", function () {
     expect(
       contract.addRecord(
         "QmaSHGobmMWyGec6SWukGxvfnC2RiLqjTeof3CK3FopM9W",
-        "Prescription.pdf",
+        "Tooth Decay",
         "0xd9cd2f4b34f0ea6783738a0e4542e151e32857df"
       )
     )
@@ -68,6 +68,16 @@ describe("MediRecords Contract Events", function () {
         "0xd9cd2f4b34f0ea6783738a0e4542e151e32857df",
         owner.address
       );
+  });
+
+  // Test to check if Doctor Paid event is emitted with arguments doctorId and Amount when Payment is done for consultation
+  it("Making Payment should emit DoctorPaid Event", async () => {
+    const [owner] = await ethers.getSigners();
+    expect(
+      contract.payDoctor(owner.address, "Tooth Decay", { value: "0.0005" })
+    )
+      .to.emit(contract, "DoctorPaid")
+      .withArgs(owner.address, "0.0005");
   });
 
   // Test to check that the function addRecord should revert with message "Incorrect Address" when called by address which is not in doctorList
@@ -99,7 +109,8 @@ describe("MediRecords Contract Stored Values", function () {
       "krishanrsinghal1@gmail.com",
       "Surgeon",
       "Male",
-      "KS1234"
+      "KS1234",
+      200
     );
 
     const doctorList = await newContract.doctorList(owner.address);
@@ -108,7 +119,8 @@ describe("MediRecords Contract Stored Values", function () {
     expect(doctorList[2]).to.equal("Surgeon");
     expect(doctorList[3]).to.equal("Male");
     expect(doctorList[4]).to.equal("KS1234");
-    expect(doctorList[5]).to.equal(owner.address);
+    expect(doctorList[5]).to.equal(200);
+    expect(doctorList[6]).to.equal(owner.address);
   });
 
   // Test to check if the values in patientList is added correctly by addPatient Function
@@ -118,7 +130,6 @@ describe("MediRecords Contract Stored Values", function () {
       "7005454542",
       "Salman Barbhuiya",
       "salmanb@gmail.com",
-      "Lung Cancer",
       "Male"
     );
 
@@ -126,8 +137,7 @@ describe("MediRecords Contract Stored Values", function () {
     expect(patientList[0]).to.equal("7005454542");
     expect(patientList[1]).to.equal("Salman Barbhuiya");
     expect(patientList[2]).to.equal("salmanb@gmail.com");
-    expect(patientList[3]).to.equal("Lung Cancer");
-    expect(patientList[4]).to.equal("Male");
+    expect(patientList[3]).to.equal("Male");
     expect(patientList[5]).to.equal(owner.address);
   });
 });

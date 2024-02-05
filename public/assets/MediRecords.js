@@ -19,6 +19,25 @@ const recordsABI = [
       {
         "indexed": false,
         "internalType": "address",
+        "name": "doctorId",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "DoctorPaid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
         "name": "patientId",
         "type": "address"
       }
@@ -77,6 +96,11 @@ const recordsABI = [
         "internalType": "string",
         "name": "reg_num",
         "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_fee",
+        "type": "uint256"
       }
     ],
     "name": "addDoctor",
@@ -109,11 +133,6 @@ const recordsABI = [
       },
       {
         "internalType": "string",
-        "name": "_ailment",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
         "name": "_gender",
         "type": "string"
       }
@@ -138,7 +157,7 @@ const recordsABI = [
       },
       {
         "internalType": "string",
-        "name": "_fileName",
+        "name": "_diagnosis",
         "type": "string"
       },
       {
@@ -192,6 +211,11 @@ const recordsABI = [
         "internalType": "string",
         "name": "regNumber",
         "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "consultationFee",
+        "type": "uint256"
       },
       {
         "internalType": "address",
@@ -253,7 +277,7 @@ const recordsABI = [
           },
           {
             "internalType": "string",
-            "name": "fileName",
+            "name": "diagnosis",
             "type": "string"
           },
           {
@@ -307,12 +331,12 @@ const recordsABI = [
       },
       {
         "internalType": "string",
-        "name": "ailment",
+        "name": "gender",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "gender",
+        "name": "ailment",
         "type": "string"
       },
       {
@@ -322,6 +346,49 @@ const recordsABI = [
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_doctorAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_ailment",
+        "type": "string"
+      }
+    ],
+    "name": "payDoctor",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fee",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateFees",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ];

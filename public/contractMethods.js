@@ -3,7 +3,7 @@ let web3;
 // Function to create contract instance
 
 async function initializeMetamask() {
-  const contractAddress = "0xfdd733D6c07F0a2EefC544642276b1B08a0c6e03";
+  const contractAddress = "0x9093337183ea983EB4A9189FDed7d831135783f3";
   if (typeof window.web3 !== "undefined") {
     web3 = new Web3(window.ethereum);
   } else {
@@ -66,6 +66,7 @@ async function registerAsDoctor() {
     specs: document.getElementById("docspecs").value,
     gender: gender,
     registrationNo: document.getElementById("reg-no").value,
+    fee: document.getElementById("fee").value,
   };
 
   if (
@@ -73,7 +74,8 @@ async function registerAsDoctor() {
     userDetails.email.trim() &&
     userDetails.specs.trim() &&
     userDetails.gender &&
-    userDetails.registrationNo.trim()
+    userDetails.registrationNo.trim() &&
+    userDetails.fee
   ) {
     if (walletAddress.trim() === accounts[0]) {
       recordContract.methods
@@ -87,7 +89,8 @@ async function registerAsDoctor() {
                 userDetails.email,
                 userDetails.specs,
                 userDetails.gender,
-                userDetails.registrationNo
+                userDetails.registrationNo,
+                userDetails.fee
               )
               .send({ from: accounts[0] })
               .then((result) => {
@@ -130,7 +133,6 @@ async function registerAsPatient() {
   let userDetails = {
     name: document.getElementById("patname").value,
     email: document.getElementById("patemail").value,
-    ailment: document.getElementById("patailment").value,
     gender: gender,
     phoneNo: document.getElementById("phn-no").value,
   };
@@ -138,7 +140,6 @@ async function registerAsPatient() {
   if (
     userDetails.name.trim() &&
     userDetails.email.trim() &&
-    userDetails.ailment.trim() &&
     userDetails.gender &&
     userDetails.phoneNo
   ) {
@@ -153,7 +154,6 @@ async function registerAsPatient() {
                 userDetails.phoneNo,
                 userDetails.name,
                 userDetails.email,
-                userDetails.ailment,
                 userDetails.gender
               )
               .send({ from: accounts[0] })
@@ -185,7 +185,6 @@ async function registerAsPatient() {
 //Function to retrieve the details of a Doctor using his/her wallet address
 async function getDoctorDetails(address) {
   let recordContract = await initializeMetamask();
-  console.log(recordContract);
   accounts = await ethereum.request({ method: "eth_requestAccounts" });
   recordContract.methods
     .doctorList(address)
@@ -197,11 +196,34 @@ async function getDoctorDetails(address) {
         document.getElementById("docgender").value = val.gender;
         document.getElementById("docspecs").value = val.speciality;
         document.getElementById("reg-no").value = val.regNumber;
+        document.getElementById("consult-fee").value = val.consultationFee;
         document.getElementById("docaddress").value = val.walletAddress;
       } else {
         alert("Something went wrong!");
       }
     });
+}
+
+//Function to update the consultation fees of the doctor
+async function updateConsultationFees() {
+  try {
+    let recordContract = await initializeMetamask();
+    accounts = await ethereum.request({ method: "eth_requestAccounts" });
+    let updatedFees = document.getElementById("consult-fee").value;
+    if (updatedFees) {
+      recordContract.methods
+        .updateFees(updatedFees)
+        .send({ from: accounts[0] })
+        .then((result) => {
+          if (result.status) {
+            alert("Fees Updated Successfully");
+            getDoctorDetails(accounts[0]);
+          }
+        });
+    }
+  } catch (err) {
+    alert("An error occurred" + err);
+  }
 }
 
 // Function to retrieve Patient Details using his/her wallet address
@@ -213,11 +235,9 @@ async function getPatientDetails(address) {
     .call({ from: accounts[0] })
     .then((val) => {
       if (val.walletAddress.toLowerCase() === address) {
-        console.log(val, address);
         document.getElementById("patname").value = val.patientName;
         document.getElementById("patemail").value = val.email;
         document.getElementById("patgender").value = val.gender;
-        document.getElementById("patailment").value = val.ailment;
         document.getElementById("phn-no").value = val.phone;
         document.getElementById("pataddress").value = val.walletAddress;
       } else {
@@ -247,9 +267,10 @@ async function getDoctorsList() {
                   .then((doctor) => {
                     if (doctor) {
                       let tr = document.createElement("tr");
-                      createTableRows(doctor, tr, 5);
+                      createTableRows(doctor, tr, 6);
                       createTableRows(doctor, tr, 0);
                       createTableRows(doctor, tr, 2);
+                      createTableRows(doctor, tr, 5);
                       let tdButton = document.createElement("td");
                       let button = document.createElement("button");
                       let content = document.createTextNode("Consult");
@@ -277,24 +298,44 @@ function createTableRows(doctor, tr, value) {
   tdName.append(content);
 }
 
+// Function to make payment to the doctor for booking consultation
+async function payToDoctor(doctorArray, patients) {
+  let recordContract = await initializeMetamask();
+  accounts = await ethereum.request({ method: "eth_requestAccounts" });
+  const ailment = document.getElementById("ailment").value;
+  const amount = parseInt(document.getElementById("consult-fees").value);
+  let toPayAmount = parseInt(amount * 0.000005245281302294794 * 10 ** 18);
+  const doctorAddress = document
+    .getElementById("doc-address")
+    .value.toLowerCase();
+  recordContract.methods
+    .payDoctor(doctorAddress, ailment)
+    .send({ from: accounts[0], value: toPayAmount })
+    .then((result) => {
+      if (result.status) {
+        doctorArray.push({ address: doctorAddress, checked: false });
+        patients.push({ address: accounts[0], checked: false });
+        localStorage.setItem(`${accounts[0]}`, JSON.stringify(doctorArray));
+        localStorage.setItem(`${doctorAddress}`, JSON.stringify(patients));
+        alert("Appointment Scheduled");
+      }
+    });
+}
 // Function to upload patient reports/ Prescription to the blockchain
 async function uploadReports() {
   let recordContract = await initializeMetamask();
   accounts = await ethereum.request({ method: "eth_requestAccounts" });
   let cid = document.getElementById("cid").value.trim();
-  let file = document.getElementById("filename").value.trim();
+  let diagnosis = document.getElementById("diagnosis").value.trim();
   let patId = document.getElementById("patId").value.trim();
 
-  if (cid && file && patId) {
+  if (cid && diagnosis && patId) {
     recordContract.methods
-      .addRecord(cid, file, patId)
+      .addRecord(cid, diagnosis, patId)
       .send({ from: accounts[0] })
       .then((result) => {
         if (result.status) {
           alert("Patient Record Updated Successfully");
-          cid.value = "";
-          file.value = "";
-          patId.value = "";
         }
       });
   } else {
@@ -320,8 +361,8 @@ async function getSelectedDoctors(array) {
             if (result) {
               const div = document.createElement("div");
               div.setAttribute("class", "doctor");
-              for (let j = 0; j < 6; j++) {
-                if (j === 3) {
+              for (let j = 0; j < 7; j++) {
+                if (j === 3 || j === 5) {
                   continue;
                 }
                 const pElement = document.createElement("p");
@@ -386,19 +427,20 @@ async function getSelectedPatients(array) {
 }
 
 // Function to retrieve patient records for the doctor to view
-async function getPatientRecords(address) {
+async function getPatientRecords(address, id) {
   let recordContract = await initializeMetamask();
   accounts = await ethereum.request({ method: "eth_requestAccounts" });
   recordContract.methods
     .getPatientDetails(address)
     .call()
     .then((result) => {
-      console.log(result);
       if (result.length > 0) {
         for (let i = 0; i < result.length; i++) {
           let hash = result[i].cid.trim();
           window.open(`https://gateway.pinata.cloud/ipfs/${hash}`, "_blank");
         }
+      } else {
+        alert("No Records to display");
       }
     });
 }
@@ -435,8 +477,8 @@ async function viewPatientsReports(address) {
             .call()
             .then((doctor) => {
               if (doctor) {
-                for (let j = 0; j < 6; j++) {
-                  if (j === 1 || j === 3 || j === 4) {
+                for (let j = 0; j < 7; j++) {
+                  if (j === 1 || j === 3 || j === 4 || j === 5) {
                     continue;
                   }
                   const pElement = document.createElement("p");
@@ -444,6 +486,12 @@ async function viewPatientsReports(address) {
                   pElement.append(ptext);
                   div.append(pElement);
                 }
+                const pDiagnosis = document.createElement("p");
+                const pDiagnosisText = document.createTextNode(
+                  `Diagnosis:- ${record[1]}`
+                );
+                pDiagnosis.append(pDiagnosisText);
+                div.append(pDiagnosis);
                 const viewButton = document.createElement("button");
                 const viewText = document.createTextNode("View Prescription");
                 viewButton.append(viewText);
