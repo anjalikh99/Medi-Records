@@ -212,12 +212,21 @@ async function updateConsultationFees() {
     let updatedFees = document.getElementById("consult-fee").value;
     if (updatedFees) {
       recordContract.methods
-        .updateFees(updatedFees)
-        .send({ from: accounts[0] })
-        .then((result) => {
-          if (result.status) {
-            alert("Fees Updated Successfully");
-            getDoctorDetails(accounts[0]);
+        .doctorList(accounts[0])
+        .call()
+        .then((doctor) => {
+          if (doctor[0] === updatedFees) {
+            alert("Please enter a different fee than previous fee");
+          } else {
+            recordContract.methods
+              .updateFees(updatedFees)
+              .send({ from: accounts[0] })
+              .then((result) => {
+                if (result.status) {
+                  alert("Fees Updated Successfully");
+                  getDoctorDetails(accounts[0]);
+                }
+              });
           }
         });
     }
@@ -302,7 +311,7 @@ function createTableRows(doctor, tr, value) {
 async function payToDoctor(doctorArray, patients) {
   let recordContract = await initializeMetamask();
   accounts = await ethereum.request({ method: "eth_requestAccounts" });
-  const ailment = document.getElementById("ailment").value;
+  const ailment = document.getElementById("ailment").value.trim();
   const amount = parseInt(document.getElementById("consult-fees").value);
   let toPayAmount = parseInt(amount * 0.000005245281302294794 * 10 ** 18);
   const doctorAddress = document
