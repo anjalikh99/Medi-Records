@@ -215,7 +215,7 @@ async function updateConsultationFees() {
         .doctorList(accounts[0])
         .call()
         .then((doctor) => {
-          if (doctor[0] === updatedFees) {
+          if (doctor[5] === updatedFees) {
             alert("Please enter a different fee than previous fee");
           } else {
             recordContract.methods
